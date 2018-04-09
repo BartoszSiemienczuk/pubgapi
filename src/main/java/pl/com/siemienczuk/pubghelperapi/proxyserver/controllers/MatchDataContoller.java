@@ -13,12 +13,14 @@ import pl.com.siemienczuk.pubghelperapi.pubgapiclient.model.PubgPlayer;
 import pl.com.siemienczuk.pubghelperapi.pubgapiclient.service.BasePubgClient;
 
 @RestController
-@RequestMapping({"/api/match"})
+@RequestMapping({"/api/{shard}/match"})
 public class MatchDataContoller {
 
     @GetMapping(path={"/{id}"})
-    public ResponseEntity<Match> getMatch(@PathVariable("id") String matchId){
-        PubgMatch match = BasePubgClient.getSingleMatchData(matchId);
+    public ResponseEntity<Match> getMatch(
+            @PathVariable("id") String matchId,
+            @PathVariable("shard") String shardId){
+        PubgMatch match = BasePubgClient.getSingleMatchData(matchId, shardId);
         if(match == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -11,11 +11,13 @@ import pl.com.siemienczuk.pubghelperapi.pubgapiclient.model.PubgPlayer;
 import pl.com.siemienczuk.pubghelperapi.pubgapiclient.service.BasePubgClient;
 
 @RestController
-@RequestMapping({"/api/player"})
+@RequestMapping({"/api/{shard}/player"})
 public class PlayerDataController {
     @GetMapping(path={"/{name}"})
-    public ResponseEntity<Player> getPlayer(@PathVariable("name") String playerName){
-        PubgPlayer pubgPlayer = BasePubgClient.getSinglePlayerData(playerName);
+    public ResponseEntity<Player> getPlayer(
+            @PathVariable("name") String playerName,
+            @PathVariable("shard") String shardId){
+        PubgPlayer pubgPlayer = BasePubgClient.getSinglePlayerData(playerName, shardId);
         if(pubgPlayer == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

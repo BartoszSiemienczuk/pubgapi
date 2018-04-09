@@ -37,12 +37,12 @@ public class Player {
         PubgId[] matchesData = sourceData.getRelationships().getMatches().getData();
         for (PubgId aMatchesData : matchesData) {
             this.matchIds.add(aMatchesData.getId());
-            PubgMatch matchObject = BasePubgClient.getSingleMatchData(aMatchesData.getId());
-            if(matchObject!=null){
-                this.matches.add(
-                    new Match(matchObject)
-                );
-            }
+//            PubgMatch matchObject = BasePubgClient.getSingleMatchData(aMatchesData.getId());
+//            if(matchObject!=null){
+//                this.matches.add(
+//                    new Match(matchObject)
+//                );
+//            }
         }
     }
 }
